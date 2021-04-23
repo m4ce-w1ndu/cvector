@@ -62,8 +62,8 @@ void* gv_at(struct v_type* vector, size_t pos)
 void gv_pb(struct v_type* vector, size_t s, void* e)
 {
 	if (!is_null(vector) && !is_null(vector->data)) {
-		if (vector->s * s + s >= vector->c) {
-			vector->c = alloc(vector->c * s + s + 1);
+		if (vector->s + s >= vector->c) {
+			vector->c = alloc(vector->c + s);
 			vector->data = realloc(vector->data, vector->c);
 		}
 		vector->s += s;
@@ -75,6 +75,13 @@ void gv_pop(struct v_type* vector, size_t s)
 {
 	if (!is_null(vector) && !is_null(vector->data) && vector->s > 0)
 	    vector->s -= s;
+}
+
+void gv_clr(struct v_type* vector, size_t s)
+{
+    if (is_null(vector) || vector->s == 0) return;
+    memset(vector->data, vector->s / s, s);
+    vector->s = 0;
 }
 
 size_t gv_size(struct v_type* vector)

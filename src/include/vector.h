@@ -15,6 +15,7 @@ size_t gv_size(struct v_type* vector);
 size_t gv_capacity(struct v_type* vector);
 void gv_pb(struct v_type* vector, size_t s, void* e);
 void gv_pop(struct v_type* vector, size_t s);
+void gv_clr(struct v_type* vector, size_t s);
 
 #define vector_new(type, size) gv_alloc(sizeof(type) * (size))
 
@@ -33,9 +34,28 @@ void gv_pop(struct v_type* vector, size_t s);
     gv_capacity(vector) / sizeof(type)
 
 #define vector_push_back(type, vector, e) \
-	gv_pb(vector, sizeof(type), &(e))
+	{ type x = e; gv_pb(vector, sizeof(type), &(x)); }
 
 #define vector_pop_back(type, vector) \
 	gv_pop(vector, sizeof(type))
+
+#define vector_front(type, vector) \
+    (*(type*)gv_at(vector, 0))
+
+#define vector_back(type, vector) \
+    (*(type*)gv_at(vector, sizeof(type) * (vector_size(type, vector) - 1)))
+
+#define vector_begin(type, vector) \
+    (type*)gv_at(vector, 0)
+
+#define vector_end(type, vector) \
+    (type*)gv_at(vector, sizeof(type) * vector_size(type, vector))
+
+#define vector_data(type, vector) \
+    (type*)gv_at(vector, 0)
+
+#define vector_clear(type, vector) \
+    gv_clr(vector, sizeof(type))
+
 
 #endif //CVECTOR_VECTOR_H
