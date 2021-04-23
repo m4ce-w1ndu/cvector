@@ -8,14 +8,21 @@
 /* vector struct forward declaration */
 typedef struct v_type* vector;
 
-vector gv_alloc(size_t new_cap);
+/* size type */
+typedef uint64_t size_type;
+
+vector gv_alloc(size_type new_cap);
 void gv_free(struct v_type* vector);
-void* gv_at(struct v_type* vector, size_t pos);
-size_t gv_size(struct v_type* vector);
-size_t gv_capacity(struct v_type* vector);
-void gv_pb(struct v_type* vector, size_t s, void* e);
-void gv_pop(struct v_type* vector, size_t s);
-void gv_clr(struct v_type* vector, size_t s);
+void* gv_at(struct v_type* vector, size_type pos);
+size_type gv_size(struct v_type* vector);
+size_type gv_capacity(struct v_type* vector);
+bool vector_empty(struct v_type* vector);
+void gv_pb(struct v_type* vector, size_type s, void* e);
+void gv_pop(struct v_type* vector, size_type s);
+void gv_clr(struct v_type* vector, size_type s);
+void gv_rsv(struct v_type* vector, size_type s);
+void gv_rsz(struct v_type* vector, size_type s);
+void vector_shrink_to_fit(struct v_type* vector);
 
 #define vector_new(type, size) gv_alloc(sizeof(type) * (size))
 
@@ -57,5 +64,10 @@ void gv_clr(struct v_type* vector, size_t s);
 #define vector_clear(type, vector) \
     gv_clr(vector, sizeof(type))
 
+#define vector_resize(type, vector, size) \
+    gv_rsz(vector, sizeof(type) * (size))
+
+#define vector_reserve(type, vector, new_cap) \
+    gv_rsv(vector, sizeof(type) * (size))
 
 #endif //CVECTOR_VECTOR_H
