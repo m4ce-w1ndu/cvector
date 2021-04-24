@@ -53,7 +53,7 @@ vector gv_alloc(size_type new_cap)
     return new;
 }
 
-void gv_free(struct v_type* vector)
+void vector_delete(struct v_type* vector)
 {
     free(vector->data);
     free(vector);
@@ -87,7 +87,7 @@ void gv_pop(struct v_type* vector, size_type s)
 void gv_clr(struct v_type* vector, size_type s)
 {
     if (is_null(vector) || vector->s == 0) return;
-    memset(vector->data, vector->s / s, s);
+    memset(vector->data, 0, vector->s * s);
     vector->s = 0;
 }
 
