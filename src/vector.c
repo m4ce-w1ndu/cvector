@@ -89,7 +89,7 @@ void vector_delete(struct v_type* vector)
 void* gv_at(struct v_type* vector, size_type pos)
 {
     if (!is_null(vector) && !is_null(vector->data))
-        return (void*)((char*)vector->data) + pos;
+        return (void*)((char*)vector->data + pos);
     return NULL;
 }
 
@@ -99,9 +99,10 @@ void gv_pb(struct v_type* vector, size_type s, void* e)
 		if (vector->s + s >= vector->c) {
 			vector->c = alloc(vector->c + s);
 			vector->data = realloc(vector->data, vector->c);
+            if (is_null(vector->data)) failure("Allocation failure");
 		}
 		vector->s += s;
-        memcpy(vector->data + vector->s - s, e, s);
+        memcpy((void*)((char*)vector->data + vector->s - s), e, s);
 	}
 }
 

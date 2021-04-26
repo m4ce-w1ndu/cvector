@@ -3,8 +3,19 @@ project(cvector C)
 
 set(CMAKE_C_STANDARD 99)
 
-set(CMAKE_C_FLAGS_DEBUG "-Wall -g -O0 -fPIC -fsanitize=address")
-set(CMAKE_C_FLAGS_RELEASE "-Os -fPIC")
+# MSVC Static Multi Threaded Debug
+if (MSVC)
+	add_compile_options(
+		$<$<CONFIG:>:/MT>
+		$<$<CONFIG:Debug>:/MTd>
+		$<$<CONFIG:Release>:/MT>
+	)
+	set(CMAKE_CXX_FLAGS_DEBUG "/TC /Wall /Od")
+	set(CMAKE_CXX_FLAGS_RELEASE "/TC /02")
+else()
+    set(CMAKE_C_FLAGS_DEBUG "-Wall -g -O0 -fPIC -fsanitize=address")
+    set(CMAKE_C_FLAGS_RELEASE "-Os -fPIC")
+endif()
 
 include_directories(src/include)
 
