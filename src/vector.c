@@ -4,13 +4,37 @@
 #include <stdio.h>
 #include <string.h>
 
-/* flow control functions */
+/*!
+ * \file
+ * \brief cvector - c99 vector implementation file. This file contains the
+ * real library implementation code, referencing the inteface described in
+ * vector.h. This implementation makes use of pointer casting in order to
+ * obtain a type agnostic container behaviour, which is then handled by the
+ * use of functional macros, which are leveraging all the casting and file
+ * preparation.
+ */
+
+/*!
+ * \brief If a failure is detected, the function is called with a message
+ * parameter. failure(const char* message) will print the error message
+ * followed by a possible cause extracted by comparing errno. The function
+ * is static, which makes it available only to this compilation unit.
+ * \param message a const char* string containing the error message.
+ */
 static void failure(const char* message)
 {
     fprintf(stderr, "Error: %s. Cause: %s\n", message, strerror(errno));
     exit(EXIT_FAILURE);
 }
 
+/*!
+ * \brief checks if a pointer of any type is null, returning true if the
+ * value corresponds to a NULL pointer or false otherwise. This function
+ * uses a property of C pointers, which are implicitly convertible into
+ * void*, without requiring explicit casts. If there is a need to compile
+ * this library in C++, it must be included into an "extern C" block.
+ * \param ptr a pointer of any type.
+ */
 static bool is_null(const void* ptr)
 {
     return (NULL == ptr);
@@ -29,12 +53,15 @@ static size_type alloc(size_type s)
     return s;
 }
 
-/* vector struct */
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+
 struct v_type {
     size_type s;
     size_type c;
     void* data;
 };
+
+#endif
 
 vector gv_alloc(size_type new_cap)
 {

@@ -7,7 +7,10 @@
 
 /*!
  * \file
- * \brief c99 vector-style dynamic array implementation.
+ * \brief This file provides a comprehensive, easy-to-use interface for
+ * a vector-style type agnostic container written in C99. The inteface
+ * makes use of functional macros in order to simplify the use of the
+ * library itself.
  * \author Simone Rolando
  */
 
