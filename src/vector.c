@@ -134,6 +134,16 @@ void gv_rsz(struct v_type* vector, size_type s)
     else gv_rsv(vector, s);
 }
 
+void gv_erase(struct v_type* vector, size_t size, size_t pos)
+{
+	if (is_null(vector)) return;
+	if (pos >= vector->s) return;
+
+	memmove(vector->data + (pos * size),
+			vector->data + (pos * (size * 2)),
+			vector->s * size);
+}
+
 void vector_shrink_to_fit(struct v_type* vector)
 {
     if (is_null(vector)) return;

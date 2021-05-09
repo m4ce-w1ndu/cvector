@@ -129,6 +129,15 @@ void gv_rsz(struct v_type* vector, size_type s);
 void vector_shrink_to_fit(struct v_type* vector);
 
 /*!
+ * \brief Removes an element of the vector given its position
+ * in the underlying byte container.
+ * \param vector vector object pointer.
+ * \param size size of object to delete.
+ * \param pos position in bytes inside vector.
+ */
+void gv_erase(struct v_type* vector, size_t size, size_t pos);
+
+/*!
  * \def vector_new(type, size)
  * Creates a new vector object of the given type and size.
  */
