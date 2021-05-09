@@ -1,8 +1,8 @@
-add_library(${CMAKE_PROJECT_NAME} vector.c include/vector.h)
+add_library(cvector vector.c include/vector.h)
 
 if (NOT MSVC)
-    target_link_libraries(${CMAKE_PROJECT_NAME} m)
+    target_link_libraries(cvector m)
 endif()
 
-install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION lib)
+install(TARGETS cvector DESTINATION lib)
 install(FILES include/vector.h DESTINATION include)
