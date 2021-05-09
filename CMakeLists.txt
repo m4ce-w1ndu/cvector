@@ -13,7 +13,7 @@ if (MSVC)
 	set(CMAKE_CXX_FLAGS_DEBUG "/TC /Wall /Od")
 	set(CMAKE_CXX_FLAGS_RELEASE "/TC /02")
 else()
-    set(CMAKE_C_FLAGS_DEBUG "-Wall -g -O0 -fPIC -fsanitize=address")
+    set(CMAKE_C_FLAGS_DEBUG "-Wall -g -O0 -fPIC")
     set(CMAKE_C_FLAGS_RELEASE "-Os -fPIC")
 endif()
 
