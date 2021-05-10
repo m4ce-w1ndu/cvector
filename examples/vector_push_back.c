@@ -14,13 +14,18 @@ int main(int argc, char** argv)
 
     printf("Insert the size: ");
     fgets(num, 2048, stdin);
-    s = strtoull(num, end_ptr, 10);
+    s = strtoull(num, &end_ptr, 10);
 
     for (i = 0; i < s; ++i)
         vector_push_back(int, v, i + 1);
 
+    /* deleting single element */
+    size_type pos_to_del = vector_size(int, v) / 2;
+
+    vector_erase(int, v, pos_to_del);
+
     for (i = 0; i < vector_size(int, v); ++i)
-        printf("v[%llu] = %d\n", i, vector_at_v(int, v, i));
+        printf("v[%zu] = %d\n", i, vector_at_v(int, v, i));
 
     vector_delete(v);
 

@@ -112,6 +112,20 @@ void gv_pop(struct v_type* vector, size_type s)
 	    vector->s -= s;
 }
 
+void gv_erase(struct v_type* vector, size_type esz, size_type pos)
+{
+    if (is_null(vector)) return;
+    if (pos * esz >= vector->s) return;
+    /* Real position */
+    pos *= esz;
+    /* Next position */
+    size_type next_pos = pos + esz;
+    /* using memmove to shift content */
+    memmove(vector->data + pos, vector->data + next_pos, vector->s);
+    /* decreasing size */
+    vector->s -= esz;
+}
+
 void gv_clr(struct v_type* vector, size_type s)
 {
     if (is_null(vector) || vector->s == 0) return;

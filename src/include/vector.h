@@ -42,6 +42,15 @@ vector gv_alloc(size_type new_cap);
 void vector_delete(struct v_type* vector);
 
 /*!
+ * \brief Vector erase from position function.
+ * \param vector vector object pointer.
+ * \param esz size in bytes of a single element.
+ * \param pos position relative to the beginning of the
+ * vector.
+ */
+void gv_erase(struct v_type* vector, size_type esz, size_type pos);
+
+/*!
  * \brief Generic vector at. Returns a pointer to the object
  * at the given index.
  * \param vector vector object pointer.
@@ -196,6 +205,16 @@ void vector_shrink_to_fit(struct v_type* vector);
  */
 #define vector_pop_back(type, vector) \
 	gv_pop(vector, sizeof(type))
+
+/*!
+ * \brief Removes an element from the specified vector index.
+ * \def vector_erase(type, vector, pos)
+ * \param type vector data type.
+ * \param vector vector object pointer.
+ * \param pos position relative to vector start index.
+ */
+#define vector_erase(type, vector, pos) \
+    gv_erase(vector, sizeof(type), pos)
 
 /*!
  * \brief Returns the value of the first element of a non-empty
