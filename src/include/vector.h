@@ -21,10 +21,12 @@
 typedef struct v_type* vector;
 
 /*!
- * \brief vector size type. A 64-bit unsigned integer.
- * \a uint64_t
+ * \brief vector size type. Unsigned integer type with the size of
+ * a type that can hold any unsigned integer value that can represent
+ * memory addresses.
+ * \a size_t
  */
-typedef uint64_t size_type;
+typedef size_t size_type;
 
 /*!
  * \brief Generic vector allocator. Creates a new generic vector
@@ -153,7 +155,7 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \return the corresponding value at index \a pos.
  */
 #define vector_at_v(type, vector, pos) \
-    (*(type*)gv_at(vector, sizeof(type) * (pos)))
+	(*(type*)gv_at(vector, sizeof(type) * (pos)))
 
 /*!
  * \brief Returns a pointer to the given position of a non-empty
@@ -165,7 +167,7 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \return a pointer to the value at index \a pos.
  */
 #define vector_at_p(type, vector, pos) \
-    (type*)gv_at(vector, sizeof(type) * (pos))
+	(type*)gv_at(vector, sizeof(type) * (pos))
 
 /*!
  * \brief Returns the size of the given vector object.
@@ -175,7 +177,7 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \return size of the vector (number of populated elements).
  */
 #define vector_size(type, vector) \
-    gv_size(vector) / sizeof(type)
+	gv_size(vector) / sizeof(type)
 
 /*!
  * \brief Returns the capacity of the given vector.
@@ -185,7 +187,7 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \return capacity of the vector (number of allocated elements).
  */
 #define vector_capacity(type, vector) \
-    gv_capacity(vector) / sizeof(type)
+	gv_capacity(vector) / sizeof(type)
 
 /*!
  * \brief Adds an element to the end of the vector.
@@ -214,7 +216,7 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \param pos position relative to vector start index.
  */
 #define vector_erase(type, vector, pos) \
-    gv_erase(vector, sizeof(type), pos)
+	gv_erase(vector, sizeof(type), pos)
 
 /*!
  * \brief Returns the value of the first element of a non-empty
@@ -225,7 +227,7 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \return a value of type \a type corresponding to the first element.
  */
 #define vector_front(type, vector) \
-    (*(type*)gv_at(vector, 0))
+	(*(type*)gv_at(vector, 0))
 
 /*!
  * \brief Returns the value of the last element of a non-empty
@@ -236,7 +238,7 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \return a value of type \a type corresponding to the last element.
  */
 #define vector_back(type, vector) \
-    (*(type*)gv_at(vector, sizeof(type) * (vector_size(type, vector) - 1)))
+	(*(type*)gv_at(vector, sizeof(type) * (vector_size(type, vector) - 1)))
 
 /*!
  * \brief Returns a pointer to the first element of a vector.
@@ -246,7 +248,7 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \return a pointer of type \a type* to the first element.
  */
 #define vector_begin(type, vector) \
-    (type*)gv_at(vector, 0)
+	(type*)gv_at(vector, 0)
 
 /*!
  * \brief Returns a pointer to the last element of a vector.
@@ -256,7 +258,7 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \return a pointer of type \a type* to the last element.
  */
 #define vector_end(type, vector) \
-    (type*)gv_at(vector, sizeof(type) * vector_size(type, vector))
+	(type*)gv_at(vector, sizeof(type) * vector_size(type, vector))
 
 /*!
  * \brief Returns a pointer to the underlying data buffer.
@@ -266,7 +268,7 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \return a pointer of type \type* to the underlying buffer.
  */
 #define vector_data(type, vector) \
-    (type*)gv_at(vector, 0)
+	(type*)gv_at(vector, 0)
 
 /*!
  * \brief Clears the vector, resetting its content and size.
@@ -275,7 +277,7 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \param vector vector object pointer.
  */
 #define vector_clear(type, vector) \
-    gv_clr(vector, sizeof(type))
+	gv_clr(vector, sizeof(type))
 
 /*!
  * \brief Resizes the vector to the new given size, changing
@@ -286,7 +288,7 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \param size new vector size.
  */
 #define vector_resize(type, vector, size) \
-    gv_rsz(vector, sizeof(type) * (size))
+	gv_rsz(vector, sizeof(type) * (size))
 
 /*!
  * \brief Reserves memory for the number of given elements.
@@ -296,6 +298,6 @@ void vector_shrink_to_fit(struct v_type* vector);
  * \param new_cap new vector capacity.
  */
 #define vector_reserve(type, vector, new_cap) \
-    gv_rsv(vector, sizeof(type) * (size))
+	gv_rsv(vector, sizeof(type) * (size))
 
 #endif //CVECTOR_VECTOR_H
